@@ -27,7 +27,7 @@ while pPtr < progdata.length
   when ','
     tape[tPtr] = get_character.to_i
   when '.'
-    print tape[tPtr].chr
+    print tape[tPtr].chr unless tape[tPtr].nil?
   when '['
     if tape[tPtr].to_i.zero?
       count = 1
