@@ -1,20 +1,16 @@
 #!/usr/bin/ruby
-asciiVal = 0
 filename = ARGV[0]
+asciiVal = 0
 
-if !filename.nil? && File.exists?(filename) && File.readable?(filename)
-  IO.read(ARGV[0]).split(//).map {|char| char.ord}.each do |asciiTarget|
+def steps_char(steps)
+  steps > 0 ? '+' : '-'
+end
+
+if filename && File.exists?(filename) && File.readable?(filename)
+  IO.read(filename).each_byte do |asciiTarget|
     steps    = asciiTarget - asciiVal
     asciiVal = asciiTarget
-    until steps.zero?
-      if steps > 0
-        print "+"
-        steps -= 1
-      else 
-        print "-"
-        steps += 1
-      end
-    end
+    print steps_char(steps) * steps.abs
     print "."
   end
 else
